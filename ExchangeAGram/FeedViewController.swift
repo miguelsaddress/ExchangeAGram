@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import CoreData
 
 class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -89,6 +90,19 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     //UIImagePickerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
+        println(image)
+        
+        let imageData: NSData = UIImageJPEGRepresentation(image, 1.0)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedObjectContext = appDelegate.managedObjectContext
+        let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!)
+        
+        var feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
+        feedItem.image = imageData
+        feedItem.caption = "Feed item caption"
+        appDelegate.saveContext()
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
