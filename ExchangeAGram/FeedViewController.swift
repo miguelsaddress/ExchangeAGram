@@ -87,11 +87,17 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        println("Feed array count: \(self.feedArray.count)")
+        return self.feedArray.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as UICollectionViewCell
+        var cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as FeedCell
+        
+        //set data into the feed cell
+        let feedItem = self.feedArray[indexPath.row] as FeedItem
+        cell.imageView.image = UIImage(data: feedItem.image)
+        cell.captionLabel.text = feedItem.caption
         return cell
     }
     
@@ -100,18 +106,23 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
         println(image)
         
-        let imageData: NSData = UIImageJPEGRepresentation(image, 1.0)
+        let imageData = UIImageJPEGRepresentation(image, 1.0)
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedObjectContext = appDelegate.managedObjectContext
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!)
         
         var feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
+        
         feedItem.image = imageData
         feedItem.caption = "Feed item caption"
         appDelegate.saveContext()
         
+        feedArray.append(feedItem)
         self.dismissViewControllerAnimated(true, completion: nil)
+
+        self.collectionView.reloadData()
+
     }
     
 
