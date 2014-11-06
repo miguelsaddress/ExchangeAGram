@@ -8,14 +8,35 @@
 
 import UIKit
 
-class FilterViewController: UIViewController {
+class FilterViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     var feedItem: FeedItem!
+    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
+        //Adding the collection view in code
+        
+        //The resposible for determinng the ways the elements are organised inside the collection
+        let layout = UICollectionViewFlowLayout()
+        //the margins
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        //size of the cells
+        layout.itemSize = CGSize(width: 150.0, height: 150.0)
+        
+        //init the collectionview
+        self.collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.backgroundColor = UIColor.whiteColor()
+        self.collectionView.registerClass(FilterCell.self, forCellWithReuseIdentifier: "filterCell")
+        
+        self.view.addSubview(self.collectionView)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,15 +44,17 @@ class FilterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //UICollectionViewDataSource
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
-    */
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell:FilterCell = self.collectionView.dequeueReusableCellWithReuseIdentifier("filterCell", forIndexPath: indexPath) as FilterCell
+        cell.imageView.image = UIImage(named:"Placeholder")
+        
+        return cell
+    }
 
 }
