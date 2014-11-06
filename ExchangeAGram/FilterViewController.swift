@@ -10,7 +10,7 @@ import UIKit
 
 class FilterViewController: UIViewController {
 
-    var thisFeedItem: FeedItem!
+    var feedItem: FeedItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
