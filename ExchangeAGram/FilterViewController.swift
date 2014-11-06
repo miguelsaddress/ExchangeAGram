@@ -93,7 +93,16 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         let filter = self.filters[indexPath.row]
         let image = self.feedItem.image
         
-        cell.imageView.image = self.filteredImageFromImage(image, filter: filter)
+        cell.imageView.image = UIImage(named: "Placeholder")
+        
+        let filterQueue:dispatch_queue_t = dispatch_queue_create("Filter Queue", nil)
+        dispatch_async(filterQueue, { () -> Void in
+            let filterImage = self.filteredImageFromImage(image, filter: filter)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                cell.imageView.image = filterImage
+            })
+        }) 
         
         return cell
     }
