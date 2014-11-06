@@ -15,9 +15,6 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
         
         //Adding the collection view in code
         
@@ -33,8 +30,11 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.backgroundColor = UIColor.whiteColor()
+        
+        //register the cell
         self.collectionView.registerClass(FilterCell.self, forCellWithReuseIdentifier: "filterCell")
         
+        //add the colelction view to the VC's view
         self.view.addSubview(self.collectionView)
 
     }
