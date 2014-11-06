@@ -105,7 +105,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     func filteredImageFromImage(imageData: NSData, filter: CIFilter) -> UIImage {
         
         //creting the image from NSData
-        let initialImage = UIImage(data: imageData)
+        let initialImage = CIImage(data: imageData)
         
         //We set the image to the filter
         filter.setValue(initialImage, forKey: kCIInputImageKey)
@@ -122,6 +122,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         let finalImage = UIImage(CGImage: cgImage)
         
         return finalImage!
+
     }
 
 
