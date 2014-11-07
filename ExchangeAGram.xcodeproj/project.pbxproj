@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4909494C1A0B97A200FF1C8C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909494B1A0B97A200FF1C8C /* FilterViewController.swift */; };
 		4909494E1A0BA42300FF1C8C /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4909494D1A0BA42300FF1C8C /* FilterCell.swift */; };
+		49106CF01A0CF071009B0AF7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49106CEF1A0CF071009B0AF7 /* ProfileViewController.swift */; };
 		497CBACD1A0A6E2C0044BC5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497CBACC1A0A6E2C0044BC5B /* AppDelegate.swift */; };
 		497CBAD01A0A6E2C0044BC5B /* ExchangeAGram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 497CBACE1A0A6E2C0044BC5B /* ExchangeAGram.xcdatamodeld */; };
 		497CBAD51A0A6E2C0044BC5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 497CBAD31A0A6E2C0044BC5B /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		4909494B1A0B97A200FF1C8C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		4909494D1A0BA42300FF1C8C /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		49106CEF1A0CF071009B0AF7 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		497CBAC71A0A6E2C0044BC5B /* ExchangeAGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExchangeAGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		497CBACB1A0A6E2C0044BC5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		497CBACC1A0A6E2C0044BC5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				49F212C71A0CCF0F003D227A /* Cells */,
 				497CBAEF1A0A6EE40044BC5B /* FeedViewController.swift */,
 				4909494B1A0B97A200FF1C8C /* FilterViewController.swift */,
+				49106CEF1A0CF071009B0AF7 /* ProfileViewController.swift */,
 				497CBAD31A0A6E2C0044BC5B /* Main.storyboard */,
 				497CBAD61A0A6E2C0044BC5B /* Images.xcassets */,
 				497CBAD81A0A6E2C0044BC5B /* LaunchScreen.xib */,
@@ -253,6 +256,7 @@
 				497CBAF21A0A70A10044BC5B /* FeedCell.swift in Sources */,
 				497CBAF01A0A6EE40044BC5B /* FeedViewController.swift in Sources */,
 				49F212C41A0CCEBA003D227A /* FeedItem.swift in Sources */,
+				49106CF01A0CF071009B0AF7 /* ProfileViewController.swift in Sources */,
 				497CBAD01A0A6E2C0044BC5B /* ExchangeAGram.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
