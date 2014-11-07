@@ -20,12 +20,16 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         let request = NSFetchRequest(entityName: "FeedItem")
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let context:NSManagedObjectContext = appDelegate.managedObjectContext!
         feedArray = context.executeFetchRequest(request, error: nil)!
 
+        self.collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,7 +102,6 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         self.navigationController?.pushViewController(filterVC, animated: false)
     }
-
     
     //UIImagePickerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
