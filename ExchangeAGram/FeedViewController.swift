@@ -33,16 +33,6 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     @IBAction func snapBarButtonItemTapped(sender: UIBarButtonItem) {
         //A controller for the image picker, whatever source
@@ -87,7 +77,6 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        println("Feed array count: \(self.feedArray.count)")
         return self.feedArray.count
     }
     
@@ -114,9 +103,9 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     //UIImagePickerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
-        println(image)
         
         let imageData = UIImageJPEGRepresentation(image, 1.0)
+        let thumbNailData = UIImageJPEGRepresentation(image, 0.1)
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedObjectContext = appDelegate.managedObjectContext
@@ -125,6 +114,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         var feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         
         feedItem.image = imageData
+        feedItem.thumbNail = thumbNailData
         feedItem.caption = "Feed item caption"
         appDelegate.saveContext()
         
