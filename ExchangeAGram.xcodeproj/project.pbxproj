@@ -91,8 +91,8 @@
 		497CBAC91A0A6E2C0044BC5B /* ExchangeAGram */ = {
 			isa = PBXGroup;
 			children = (
-				49F212C51A0CCEF0003D227A /* Model */,
 				497CBACC1A0A6E2C0044BC5B /* AppDelegate.swift */,
+				49F212C51A0CCEF0003D227A /* Model */,
 				49F212C71A0CCF0F003D227A /* Cells */,
 				497CBAEF1A0A6EE40044BC5B /* FeedViewController.swift */,
 				4909494B1A0B97A200FF1C8C /* FilterViewController.swift */,
