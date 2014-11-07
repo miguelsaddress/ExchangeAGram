@@ -104,6 +104,12 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
         
+        //  info = [
+        //        UIImagePickerControllerOriginalImage: <UIImage: 0x7f94ea65fe20> size {554, 426} orientation 0 scale 1.000000,
+        //        UIImagePickerControllerMediaType: public.image,
+        //        UIImagePickerControllerReferenceURL: assets-library://asset/asset.JPG?id=3F44831C-DA90-40B2-B03D-2D3080E8FD8B&ext=JPG
+        //  ]
+
         let imageData = UIImageJPEGRepresentation(image, 1.0)
         let thumbNailData = UIImageJPEGRepresentation(image, 0.1)
         
@@ -124,6 +130,5 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.collectionView.reloadData()
 
     }
-    
 
 }
