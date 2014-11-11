@@ -173,6 +173,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         let photoAction = UIAlertAction(title: "Post Photo to Facebook with caption", style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
             self.saveFilterToCoreData(indexPath)
+            self.shareToFacebook(indexPath)
         }
         alertController.addAction(photoAction)
         
@@ -191,6 +192,22 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 
+    func shareToFacebook(indexPath: NSIndexPath) {
+        let filteredImage = self.filteredImageFromImage(self.feedItem.image, filter: self.filters[indexPath.row])
+        let photos: NSArray = [filteredImage]
+        var params = FBPhotoParams()
+        params.photos = photos
+    
+        FBDialogs.presentShareDialogWithPhotoParams(params, clientState: nil) { (call, result, error) -> Void in
+            //code
+            println(call)
+            if (result != nil) {
+                println(result)
+            } else {
+                println(error)
+            }
+        }
+    }
     
     //Caching functions
     
