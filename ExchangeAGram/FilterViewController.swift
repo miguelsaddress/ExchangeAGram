@@ -112,16 +112,20 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     //UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.createUIAlertController()
+        self.createUIAlertController(indexPath)
         
+    }
+    
+    func saveFilterToCoreData(indexPath: NSIndexPath){
         //apply the filter to our real image, not the low quality thumbnail
-//        let filteredImage = self.filteredImageFromImage(self.feedItem.image, filter: self.filters[indexPath.row])
-//        let imageData = UIImageJPEGRepresentation(filteredImage, 1.0)
-//        self.feedItem.image = imageData
-//        self.feedItem.thumbNail = UIImageJPEGRepresentation(filteredImage, 0.1)
-//        
-//        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
-//        self.navigationController?.popViewControllerAnimated(true)
+        let filteredImage = self.filteredImageFromImage(self.feedItem.image, filter: self.filters[indexPath.row])
+        let imageData = UIImageJPEGRepresentation(filteredImage, 1.0)
+        self.feedItem.image = imageData
+        self.feedItem.thumbNail = UIImageJPEGRepresentation(filteredImage, 0.1)
+        
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        self.navigationController?.popViewControllerAnimated(true)
+
     }
     
     
@@ -152,7 +156,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     //UIAlertController Helper Functions
     
-    func createUIAlertController() {
+    func createUIAlertController(indexPath: NSIndexPath) {
         var alertController = UIAlertController(title: "Photo Options", message: "Please select an option", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
             //configuration and behaviour of the textfield
@@ -160,9 +164,34 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
             textField.secureTextEntry = false
         }
         
+        var text: String
+        let textField = alertController.textFields![0] as UITextField
+        
+        if textField.text != nil {
+            text = textField.text
+        }
+        
+        let photoAction = UIAlertAction(title: "Post Photo to Facebook with caption", style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
+            self.saveFilterToCoreData(indexPath)
+        }
+        alertController.addAction(photoAction)
+        
+        let saveFilterAction = UIAlertAction(title: "Save Filter without posting to Facebook", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            self.saveFilterToCoreData(indexPath)
+        }
+        
+        alertController.addAction(saveFilterAction)
+        
+        let cancelAction = UIAlertAction(title: "Select another Action", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
+            //nothing here yet
+        }
+        
+        alertController.addAction(cancelAction)
+        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 
+    
     //Caching functions
     
     func cacheImage(imageNumber: Int) {
