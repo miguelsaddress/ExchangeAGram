@@ -116,12 +116,13 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
     }
     
-    func saveFilterToCoreData(indexPath: NSIndexPath){
+    func saveFilterToCoreData(indexPath: NSIndexPath, caption: String){
         //apply the filter to our real image, not the low quality thumbnail
         let filteredImage = self.filteredImageFromImage(self.feedItem.image, filter: self.filters[indexPath.row])
         let imageData = UIImageJPEGRepresentation(filteredImage, 1.0)
         self.feedItem.image = imageData
         self.feedItem.thumbNail = UIImageJPEGRepresentation(filteredImage, 0.1)
+        self.feedItem.caption = caption
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         self.navigationController?.popViewControllerAnimated(true)
@@ -164,21 +165,16 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
             textField.secureTextEntry = false
         }
         
-        var text: String
         let textField = alertController.textFields![0] as UITextField
         
-        if textField.text != nil {
-            text = textField.text
-        }
-        
         let photoAction = UIAlertAction(title: "Post Photo to Facebook with caption", style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
-            self.saveFilterToCoreData(indexPath)
+            self.saveFilterToCoreData(indexPath, caption: textField.text)
             self.shareToFacebook(indexPath)
         }
         alertController.addAction(photoAction)
         
         let saveFilterAction = UIAlertAction(title: "Save Filter without posting to Facebook", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-            self.saveFilterToCoreData(indexPath)
+            self.saveFilterToCoreData(indexPath, caption: textField.text)
         }
         
         alertController.addAction(saveFilterAction)
