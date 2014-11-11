@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, FBLoginViewDelegate {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var fbLoginView: FBLoginView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,5 +25,21 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func loginViewShowingLoggedInUser(loginView: FBLoginView!) {
+        //
+    }
+    
+    func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
+        //
+    }
+    
+    func loginViewShowingLoggedOutUser(loginView: FBLoginView!) {
+        //
+    }
+    
+    func loginView(loginView: FBLoginView!, handleError error: NSError!) {
+        
+    }
 
 }
