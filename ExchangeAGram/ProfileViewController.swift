@@ -29,11 +29,15 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate {
     
     
     func loginViewShowingLoggedInUser(loginView: FBLoginView!) {
-        //
+        //when a user succesfully logs in
+        self.nameLabel.hidden = false
+        self.profileImageView.hidden = false
     }
     
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
-        //
+        //when a user succesfully logs out
+        self.nameLabel.hidden = true
+        self.profileImageView.hidden = true
     }
     
     func loginViewShowingLoggedOutUser(loginView: FBLoginView!) {
