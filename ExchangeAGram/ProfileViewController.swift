@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.fbLoginView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
