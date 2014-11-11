@@ -112,14 +112,16 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     //UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //apply the filter to our real image, not the low quality thumbnail
-        let filteredImage = self.filteredImageFromImage(self.feedItem.image, filter: self.filters[indexPath.row])
-        let imageData = UIImageJPEGRepresentation(filteredImage, 1.0)
-        self.feedItem.image = imageData
-        self.feedItem.thumbNail = UIImageJPEGRepresentation(filteredImage, 0.1)
+        self.createUIAlertController()
         
-        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
-        self.navigationController?.popViewControllerAnimated(true)
+        //apply the filter to our real image, not the low quality thumbnail
+//        let filteredImage = self.filteredImageFromImage(self.feedItem.image, filter: self.filters[indexPath.row])
+//        let imageData = UIImageJPEGRepresentation(filteredImage, 1.0)
+//        self.feedItem.image = imageData
+//        self.feedItem.thumbNail = UIImageJPEGRepresentation(filteredImage, 0.1)
+//        
+//        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+//        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
@@ -146,6 +148,19 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         return finalImage!
 
+    }
+    
+    //UIAlertController Helper Functions
+    
+    func createUIAlertController() {
+        var alertController = UIAlertController(title: "Photo Options", message: "Please select an option", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            //configuration and behaviour of the textfield
+            textField.placeholder = "Add a caption!"
+            textField.secureTextEntry = false
+        }
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
     //Caching functions

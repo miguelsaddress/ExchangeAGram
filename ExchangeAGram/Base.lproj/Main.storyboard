@@ -67,6 +67,7 @@
                     <navigationItem key="navigationItem" id="KQ1-qK-O99">
                         <barButtonItem key="leftBarButtonItem" title="Profile" id="VXh-Ni-tsr">
                             <connections>
+                                <action selector="profileTapped:" destination="BYZ-38-t0r" id="hvQ-Eu-bwE"/>
                                 <segue destination="3Ig-v0-cbS" kind="show" identifier="profileSegue" id="TnK-LO-UxY"/>
                             </connections>
                         </barButtonItem>
