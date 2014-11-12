@@ -17,11 +17,27 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.addAnnotation(latitude: 48.868639224587, longitud: 2.37119161036255, title: "Canal Saint-Martin", subtitle: "Paris")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func addAnnotation(#latitude: Double, longitud: Double, title: String = "", subtitle:String = "") {
+        let location = CLLocationCoordinate2D(latitude: 48.868639224587, longitude: 2.37119161036255)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(location, span)
+        
+        self.mapView.setRegion(region, animated: true)
+        
+        var annotation = MKPointAnnotation()
+        annotation.setCoordinate(location)
+        annotation.title = title
+        annotation.subtitle = subtitle
+        
+        self.mapView.addAnnotation(annotation)
     }
 
 }

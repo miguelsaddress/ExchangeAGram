@@ -11,16 +11,23 @@ import MobileCoreServices
 import CoreData
 import MapKit
 
-class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
     var feedArray = [AnyObject]()
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.distanceFilter = 100.0
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -129,6 +136,8 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         feedItem.image = imageData
         feedItem.thumbNail = thumbNailData
         feedItem.caption = "Feed item caption"
+        feedItem.latitude = self.locationManager.location.coordinate.latitude
+        feedItem.longitude = self.locationManager.location.coordinate.longitude
         appDelegate.saveContext()
         
         feedArray.append(feedItem)
@@ -137,5 +146,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.collectionView.reloadData()
 
     }
+    
+    //CCLocationManagerDelegate
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        println("locations = [\(locations)]")
+    }
+
 
 }
