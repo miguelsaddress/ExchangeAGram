@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class MapViewController: UIViewController {
 
@@ -17,7 +18,22 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.addAnnotation(latitude: 48.868639224587, longitud: 2.37119161036255, title: "Canal Saint-Martin", subtitle: "Paris")
+        let request: NSFetchRequest = NSFetchRequest(entityName: "FeedItem")
+        let context:NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+        var error:NSError?
+        let itemsArray = context.executeFetchRequest(request, error: &error)
+        if( error == nil ){
+            //do nothing...
+            println(error)
+        }
+        
+        for item in itemsArray! {
+            let i = item as FeedItem
+            self.addAnnotation(latitude: Double(i.latitude), longitude: Double(i.longitude) , title: i.caption)
+        }
+        
+        
+ 
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,9 +41,10 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func addAnnotation(#latitude: Double, longitud: Double, title: String = "", subtitle:String = "") {
-        let location = CLLocationCoordinate2D(latitude: 48.868639224587, longitude: 2.37119161036255)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
+    func addAnnotation(#latitude: Double, longitude: Double, title: String = "", subtitle:String = "") {
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let span = MKCoordinateSpanMake(50, 50)
         let region = MKCoordinateRegionMake(location, span)
         
         self.mapView.setRegion(region, animated: true)
