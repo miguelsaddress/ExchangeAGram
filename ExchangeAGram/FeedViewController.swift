@@ -100,7 +100,13 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         //set data into the feed cell
         let feedItem = self.feedArray[indexPath.row] as FeedItem
-        cell.imageView.image = UIImage(data: feedItem.image)
+        let itemImage = UIImage(data: feedItem.image)!
+        if feedItem.filtered as Bool {
+            cell.imageView.image = UIImage(CGImage: itemImage.CGImage, scale: 1.0, orientation: UIImageOrientation.Up)!
+        } else {
+            cell.imageView.image = itemImage
+        }
+
         cell.captionLabel.text = feedItem.caption
         return cell
     }
@@ -134,6 +140,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         var feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         
         feedItem.uniqueID = NSUUID().UUIDString
+        feedItem.filtered = false
         feedItem.image = imageData
         feedItem.thumbNail = thumbNailData
         feedItem.caption = "Feed item caption"

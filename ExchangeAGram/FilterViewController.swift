@@ -123,6 +123,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.feedItem.image = imageData
         self.feedItem.thumbNail = UIImageJPEGRepresentation(filteredImage, 0.1)
         self.feedItem.caption = caption
+        self.feedItem.filtered = true
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         self.navigationController?.popViewControllerAnimated(true)
@@ -209,7 +210,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func cacheImage(imageNumber: Int) {
         let fileName = self.getFileName(imageNumber)
-        let uniquePath = self.tmp.stringByAppendingPathComponent(fileName)
+            let uniquePath = self.tmp.stringByAppendingPathComponent(fileName)
         if !NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
             let data = self.feedItem.thumbNail
             let filter = self.filters[imageNumber]
@@ -224,7 +225,9 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         if !NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
             self.cacheImage(imageNumber)
         }
-        let image = UIImage(contentsOfFile: uniquePath)!
+        var image = UIImage(contentsOfFile: uniquePath)!
+        //making sure of the orientation
+        image = UIImage(CGImage: image.CGImage, scale: 1.0, orientation: UIImageOrientation.Up)!
         return image
     }
     
