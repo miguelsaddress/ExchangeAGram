@@ -151,6 +151,15 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         println("locations = [\(locations)]")
     }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        // The location "unknown" error simply means the manager is currently unable to get the location.
+        // We can ignore this error for the scenario of getting a single location fix, because we already have a
+        // timeout that will stop the location manager to save power.
+        if error.code != CLError.LocationUnknown.rawValue {
+            self.locationManager.stopUpdatingLocation()
+        }
 
+    }
 
 }
