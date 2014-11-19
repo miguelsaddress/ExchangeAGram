@@ -24,6 +24,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Do any additional setup after loading the view.
         
         //background image
+        
+        //If the bg color of the collection view is the default one, it will be black
+        //and i want it trnsparent (AKA clearColor)
+        self.collectionView.backgroundColor = UIColor.clearColor()
+        
         let backgroundImage = UIImage(named: "AutumnBackground")!
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
         
