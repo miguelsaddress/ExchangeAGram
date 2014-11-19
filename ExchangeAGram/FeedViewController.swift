@@ -22,6 +22,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //background image
+        let backgroundImage = UIImage(named: "AutumnBackground")!
+        self.view.backgroundColor = UIColor(patternImage: backgroundImage)
+        
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
