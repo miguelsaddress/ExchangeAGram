@@ -133,6 +133,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         var feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         
+        feedItem.uniqueID = NSUUID().UUIDString
         feedItem.image = imageData
         feedItem.thumbNail = thumbNailData
         feedItem.caption = "Feed item caption"
