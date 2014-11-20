@@ -134,7 +134,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="mapViewButtonTapped:" destination="3Ig-v0-cbS" eventType="touchUpInside" id="gNf-pQ-OcQ"/>
                                     <segue destination="x61-Ve-7QG" kind="show" identifier="mapSegue" id="lcc-VE-CTI"/>
                                 </connections>
                             </button>
