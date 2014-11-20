@@ -10,11 +10,17 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="bVt-Wd-Ga7">
-                    <rect key="frame" x="-64" y="-46" width="544" height="526"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="bVt-Wd-Ga7">
+                    <rect key="frame" x="-32" y="-23" width="544" height="526"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="bVt-Wd-Ga7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-23" id="bh5-dB-xDu"/>
+                <constraint firstAttribute="trailing" secondItem="bVt-Wd-Ga7" secondAttribute="trailing" constant="-32" id="dJm-eP-TTY"/>
+                <constraint firstItem="bVt-Wd-Ga7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-32" id="gRE-W9-6DL"/>
+                <constraint firstAttribute="bottom" secondItem="bVt-Wd-Ga7" secondAttribute="bottom" constant="-23" id="ud9-j9-ucK"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
