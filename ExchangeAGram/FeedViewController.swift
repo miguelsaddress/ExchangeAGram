@@ -177,7 +177,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         if error.code != CLError.LocationUnknown.rawValue {
             self.locationManager.stopUpdatingLocation()
         }
-
+        self.locationManager.stopUpdatingLocation()
     }
 
 }
